@@ -9,6 +9,7 @@ import {
   Row,
   Select,
   Table,
+  Modal,
 } from "react-ui-softscript";
 import "./App.css";
 import "react-ui-softscript/dist/index.css";
@@ -27,6 +28,7 @@ function App() {
   const [values, setValues] = React.useState({
     valueButton: "",
     valueInput: "",
+    isOpen: false,
     headers: ["Column 1", "Column 2", "Column 3"],
     rows: [
       ["Cell 1", "Cell 2", "Cell 3"],
@@ -45,6 +47,24 @@ function App() {
 
   return (
     <>
+      <Modal
+        isOpen={values.isOpen}
+        onClose={() =>
+          setValues((oldValues) => ({
+            ...oldValues,
+            isOpen: false,
+          }))
+        }
+        size="lg"
+        title="Modal title"
+      >
+        <p className="my-4 text-blueGray-500 text-lg leading-relaxed">
+          Your modal content here Your modal content here Your modal content
+          here Your modal content here Your modal content here Your modal
+          content here Your modal content here Your modal content here Your
+          modal content here Your modal content here
+        </p>
+      </Modal>
       <Header
         user={{ name: "Seu nome aqui" }}
         ariaLabel="header"
@@ -63,12 +83,12 @@ function App() {
                 children={
                   <Button
                     variant="primary"
-                    label="react-ui-softscript"
-                    ariaLabel="teste button"
+                    label="Abrir modal"
+                    ariaLabel="Abrir modal"
                     onClick={() =>
                       setValues((oldValues) => ({
                         ...oldValues,
-                        valueButton: "testado",
+                        isOpen: true,
                       }))
                     }
                     title="teste button"
@@ -144,6 +164,8 @@ function App() {
                       <p>{row[1]}</p>
                     </div>
                   )}
+                  iconNotExpanded={undefined}
+                  iconExpanded={undefined}
                 />
               }
             />
